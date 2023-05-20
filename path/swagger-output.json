@@ -8,7 +8,8 @@
   "host": "memory-lanes-api.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http, https"
+    "http",
+    "https"
   ],
   "paths": {
     "/events/": {
