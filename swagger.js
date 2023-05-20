@@ -5,8 +5,8 @@ const doc = {
         title: 'Memory Lanes API',
         description: 'This is the API that handles the data for the Memory Lanes App',
     },
-    host: 'localhost:3000',
-    schemes: ['http'],
+    host: 'memory-lanes-api.onrender.com',
+    schemes: ['http, https'],
 };
 
 const outputFile = './path/swagger-output.json';

@@ -13,7 +13,6 @@ app.use(BodyParser.json());
 
 app.use('/', require('./routes'));
 
-const hostname = 'localhost';
 const port = 3000;
 
 mongodb.connect((err, mongodb) => {
@@ -21,7 +20,7 @@ mongodb.connect((err, mongodb) => {
         console.log(err);
     } else {
         app.listen(port);
-        console.log(`Connected to database\nServer running at http://${hostname}:${port}/`);
+        console.log('Connected to database');
     }
 });
 

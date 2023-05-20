@@ -5,10 +5,10 @@
     "description": "This is the API that handles the data for the Memory Lanes App",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "memory-lanes-api.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "http, https"
   ],
   "paths": {
     "/events/": {
