@@ -1,0 +1,93 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Memory Lanes API",
+    "description": "This is the API that handles the data for the Memory Lanes App",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/events/": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Get all events",
+        "description": "This request gets all events in the database",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Create an event",
+        "description": "This request creates a new event",
+        "parameters": [
+          {
+            "name": "event",
+            "in": "body",
+            "description": "Event object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "eventName": {
+                  "type": "string",
+                  "example": "First Anniversary"
+                },
+                "eventDescription": {
+                  "type": "string",
+                  "example": "We went to St George and ..."
+                },
+                "lat": {
+                  "type": "number",
+                  "example": 37.0965
+                },
+                "long": {
+                  "type": "number",
+                  "example": 113.5684
+                },
+                "eventStartDate": {
+                  "type": "string",
+                  "example": "2/15/2020"
+                },
+                "eventEndDate": {
+                  "type": "string",
+                  "example": "2/20/2020"
+                }
+              },
+              "required": [
+                "eventName",
+                "eventDescription",
+                "lat",
+                "long",
+                "eventStartDate",
+                "eventEndDate"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
