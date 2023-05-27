@@ -5,7 +5,7 @@
     "description": "This is the API that handles the data for the Memory Lanes App",
     "version": "1.0.0"
   },
-  "host": "memory-lanes-api.onrender.com",
+  "host": "",
   "basePath": "/",
   "schemes": [
     "http",
@@ -62,11 +62,11 @@
                 },
                 "eventStartDate": {
                   "type": "string",
-                  "example": "2/15/2020"
+                  "example": "2011-10-05T14:48:00.000Z"
                 },
                 "eventEndDate": {
                   "type": "string",
-                  "example": "2/20/2020"
+                  "example": "2011-10-05T14:48:00.000Z"
                 }
               },
               "required": [
@@ -84,8 +84,96 @@
           "200": {
             "description": "OK"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/events/{id}": {
+      "put": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Update event by Id",
+        "description": "This is a request to update a given contact record",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Event ID."
+          },
+          {
+            "name": "event",
+            "in": "body",
+            "description": "Event object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "eventName": {
+                  "type": "string",
+                  "example": "First Anniversary"
+                },
+                "eventDescription": {
+                  "type": "string",
+                  "example": "We went to St George and ..."
+                },
+                "lat": {
+                  "type": "number",
+                  "example": 37.0965
+                },
+                "long": {
+                  "type": "number",
+                  "example": 113.5684
+                },
+                "eventStartDate": {
+                  "type": "string",
+                  "example": "2011-10-05T14:48:00.000Z"
+                },
+                "eventEndDate": {
+                  "type": "string",
+                  "example": "2011-10-05T14:48:00.000Z"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "501": {
+            "description": "Not Implemented"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Deletes a given event",
+        "description": "This request deletes a given event record",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Event id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "502": {
+            "description": "Bad Gateway"
           }
         }
       }

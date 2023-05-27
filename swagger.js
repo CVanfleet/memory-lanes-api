@@ -5,7 +5,7 @@ const doc = {
         title: 'Memory Lanes API',
         description: 'This is the API that handles the data for the Memory Lanes App',
     },
-    host: 'memory-lanes-api.onrender.com',
+    host: '',
     schemes: ['http', 'https'],
 };
 

@@ -1,7 +1,7 @@
 // LOCALHOST
 ### Get all events
 GET http://localhost:3000/events
-### Create a contact
+### Create an event
 POST http://localhost:3000/events HTTP/1.1
 Content-Type: application/json
 
@@ -10,15 +10,29 @@ Content-Type: application/json
   "eventDescription": "This is a test event created through localhost",
   "lat": 37.0965,
   "long": 113.5684,
-  "eventStartDate": "2/15/2020",
-  "eventEndDate": "2/20/2020"
+  "eventStartDate": "2011-10-05T14:48:00.000Z",
+  "eventEndDate": "2011-10-05T14:48:00.000Z"
 }
+### Update an event
+PUT http://localhost:3000/events/64727ae610423049b5a77761 HTTP/1.1
+Content-Type: application/json
+
+{
+  "eventName": "Test Event",
+  "eventDescription": "This is updated through the .rest file",
+  "lat": 37.0965,
+  "long": 113.5684,
+  "eventStartDate": "2011-10-05T14:48:00.000Z",
+  "eventEndDate": "2011-10-05T14:48:00.000Z"
+}
+### Delete an event
+DELETE http://localhost:3000/events/64727ae610423049b5a77761 HTTP/1.1
 
 // RENDER
 ### Get all events
 GET https://memory-lanes-api.onrender.com/events
 
-### Create a contact
+### Create an event
 POST https://memory-lanes-api.onrender.com/events HTTP/1.1
 Content-Type: application/json
 
@@ -30,3 +44,17 @@ Content-Type: application/json
   "eventStartDate": "2/15/2020",
   "eventEndDate": "2/20/2020"
 }
+### Update an event
+PUT https://memory-lanes-api.onrender.com/events/64727ae610423049b5a77761 HTTP/1.1
+Content-Type: application/json
+
+{
+  "eventName": "Test Event",
+  "eventDescription": "This is updated through the .rest file",
+  "lat": 37.0965,
+  "long": 113.5684,
+  "eventStartDate": "2011-10-05T14:48:00.000Z",
+  "eventEndDate": "2011-10-05T14:48:00.000Z"
+}
+### Delete an event
+DELETE https://memory-lanes-api.onrender.com/events/64727ae610423049b5a77761 HTTP/1.1
