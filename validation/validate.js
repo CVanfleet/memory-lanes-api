@@ -3,7 +3,7 @@ const { body, validationResult } = require('express-validator')
 const createEventValidation = () => {
     return [
         // Event Name must be a string and must not be empty
-        body('eventName').isString().withMessage("Event name must be a string").notEmpty().withMessage("Event name must be a string and not empty.")
+        body('eventName').isString().withMessage("Event name must be a string").notEmpty().withMessage("Event name must not be empty.")
             .bail(),
         // Event Discription must be a string and cannot be empty
         body('eventDescription').isString().withMessage("Event description must be a string").notEmpty().withMessage("Event description must not be empty.")
