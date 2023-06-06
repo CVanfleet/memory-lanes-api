@@ -1,6 +1,8 @@
 // LOCALHOST
 ### Get all events
 GET http://localhost:3000/events
+### Get Event by Id
+GET http://localhost:3000/events/64690ec26fb5cb9cb918f660
 ### Create an event
 POST http://localhost:3000/events HTTP/1.1
 Content-Type: application/json

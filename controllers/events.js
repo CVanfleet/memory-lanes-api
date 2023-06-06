@@ -15,6 +15,25 @@ async function getEvents(req, res, next){
     }
 };
 
+async function getEventById(req, res, next){
+
+    // #swagger.tags = ['Events']
+    // #swagger.summary = 'Get event by id'
+    // #swagger.description = 'This request gets an individual event by id number'
+    // #swagger.parameters['id'] = { description: 'Event id' }
+    
+    const eventId = new ObjectId(req.params.id);
+
+    try {
+        const result = await mongo.getConnection().db('memory-lanes-db').collection('event').find({_id: eventId});
+        const list = await result.toArray();
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(list[0]);
+    } catch (error) {
+        next(error);
+    }
+}
+
 async function createEvent(req, res, next) {
     // #swagger.tags = ['Events']
     // #swagger.summary = 'Create an event'
@@ -99,6 +118,7 @@ async function deleteEvent(req, res, next){
 
 module.exports = {
     getEvents,
+    getEventById,
     createEvent,
     updateEvent,
     deleteEvent,
