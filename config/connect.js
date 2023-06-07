@@ -20,6 +20,8 @@ const connect = (callback) => {
         .catch((err) => {
             callback(err);
         });
+
+    mongooseConnect();    
 };
 
 const getConnection = () => {

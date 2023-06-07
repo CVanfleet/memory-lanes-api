@@ -14,8 +14,6 @@ const swaggerDocument = require('./path/swagger-output.json')
 require('./config/passport')(passport)
 
 // Connect to db 
-mongodb.mongooseConnect();
-
 mongodb.connect((err, mongodb) => {
     if(err) {
         console.log(err);
@@ -41,9 +39,9 @@ app.set('views', './views');
 
 app.use(
     session({
-        secret: '1234qwer!Q',
+        secret: 'Cool B34ns',
         resave: false,
-        saveUninitialized: false
+        saveUninitialized: false,
     })
 )
 
