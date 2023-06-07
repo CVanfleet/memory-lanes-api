@@ -1,4 +1,4 @@
-const mongo = require('../db/connect');
+const mongo = require('../config/connect');
 const ObjectId = require('mongodb').ObjectId;
 
 async function getEvents(req, res, next){

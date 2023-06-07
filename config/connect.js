@@ -2,6 +2,7 @@ require('dotenv').config();
 const {MongoClient} = require('mongodb');
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
+const mongoose = require('mongoose')
 
 let _db;
 
@@ -28,7 +29,24 @@ const getConnection = () => {
     return _db;
 }
 
+const mongooseConnect = async () => {
+    try{
+        const conn = await mongoose.connect(process.env.MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        })
+
+        console.log('Mongoose connected')
+    } catch(err){
+        console.error(err);
+        process.exit(1)
+    }
+}
+
 module.exports = {
     connect,
     getConnection,
+    mongooseConnect,
 }
+
+
