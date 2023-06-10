@@ -7,7 +7,7 @@ module.exports = function(passport, domain) {
     passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: `${domain}/auth/google/callback`,
+        callbackURL: 'https://memory-lanes-api.onrender.com/auth/google/callback',
     },
     async (accessToken, refreshToken, profile, done) => {
         const newUser = {
