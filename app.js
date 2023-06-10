@@ -7,7 +7,6 @@ const morgan = require('morgan')
 const passport = require('passport')
 const session = require('express-session')
 const MemoryStore = require('memorystore')(session)
-const expressHandlebars = require('express-handlebars')
 const cors = require('cors')
 const swaggerDocument = require('./path/swagger-output.json')
 
@@ -35,9 +34,8 @@ if(process.env.NODE_ENV === 'development') {
 }
 
 // Express Handlebars for templating
-app.engine('.hbs', expressHandlebars.engine({ defaultLayout: 'main', extname: '.hbs'}));
-app.set('view engine', '.hbs');
-app.set('views', './views');
+app.set('view engine', 'ejs');
+app.set('views', './views/layouts');
 
 app.use(
     session({

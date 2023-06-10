@@ -4,15 +4,15 @@ const { ensureAuth, ensureGuest } = require('../middleware/auth')
 // @desc    Login/Landing page
 // @route   GET /
 router.get('/', ensureGuest, (req, res) => {
-    res.render('login', {
-        layout: 'login'
-    })
+    res.render('login')
 })
 
 // @desc    Dashboard
 // @route   GET /
 router.get('/dashboard', ensureAuth, (req, res) => {
-    res.render('dashboard')
+    res.render('main', {
+        body: '../dashboard'
+    })
 })
 
 router.use('/events', require('./events'));
