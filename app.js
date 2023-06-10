@@ -10,8 +10,16 @@ const MemoryStore = require('memorystore')(session)
 const cors = require('cors')
 const swaggerDocument = require('./path/swagger-output.json')
 
+// Morgan for logging
+if(process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'))
+    const domain = 'http://localhost:3000'
+} else {
+    const domain = 'https://memory-lanes-api.onrender.com'
+}
+
 // Passport config
-require('./config/passport')(passport)
+require('./config/passport')(passport, domain)
 
 // Connect to db 
 mongodb.connect((err, mongodb) => {
@@ -31,6 +39,9 @@ const app = express();
 // Morgan for logging
 if(process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
+    const domain = 'http://localhost:3000'
+} else {
+    const domain = 'https://memory-lanes-api.onrender.com'
 }
 
 // Express Handlebars for templating
