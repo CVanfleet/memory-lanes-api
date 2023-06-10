@@ -1,19 +1,20 @@
 const router = require('express').Router();
 const eventsController = require('../controllers/events');
+const { ensureAuth } = require('../middleware/auth');
 const {createEventValidation, updateEventValidation, validateError, eventIdValidation} = require('../validation/validate');
 
 
 // get
-router.get('/', eventsController.getEvents);
-router.get('/:id', eventIdValidation(), validateError, eventsController.getEventById)
+router.get('/', ensureAuth, eventsController.getEvents);
+router.get('/:id', ensureAuth, eventIdValidation(), validateError, eventsController.getEventById)
 
 // post
-router.post('/', createEventValidation(), validateError, eventsController.createEvent);
+router.post('/', ensureAuth, createEventValidation(), validateError, eventsController.createEvent);
 
 // put 
-router.put('/:id', updateEventValidation(), eventIdValidation(), validateError, eventsController.updateEvent);
+router.put('/:id', ensureAuth, updateEventValidation(), eventIdValidation(), validateError, eventsController.updateEvent);
 
 // delete
-router.delete('/:id', eventIdValidation(), validateError, eventsController.deleteEvent);
+router.delete('/:id', ensureAuth, eventIdValidation(), validateError, eventsController.deleteEvent);
 
 module.exports = router;

@@ -6,6 +6,7 @@ const swaggerUi = require('swagger-ui-express')
 const morgan = require('morgan')
 const passport = require('passport')
 const session = require('express-session')
+const MemoryStore = require('memorystore')(session)
 const expressHandlebars = require('express-handlebars')
 const cors = require('cors')
 const swaggerDocument = require('./path/swagger-output.json')
@@ -25,6 +26,7 @@ mongodb.connect((err, mongodb) => {
 
 // initialize express
 var express = require('express');
+const { ensureAuth } = require('./middleware/auth')
 const app = express();
 
 // Morgan for logging
@@ -39,12 +41,15 @@ app.set('views', './views');
 
 app.use(
     session({
+        cookie: { maxAge: 86400000 },
+        store: new MemoryStore({
+            checkPeriod: 86400000
+        }),
         secret: 'Cool B34ns',
         resave: false,
         saveUninitialized: false,
     })
 )
-
 
 // Passport middleware
 app.use(passport.initialize())
@@ -54,7 +59,7 @@ app.use(passport.session())
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Swagger
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs', ensureAuth, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Parser
 app.use(express.json())
