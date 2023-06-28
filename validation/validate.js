@@ -31,14 +31,22 @@ const updateEventValidation = () => {
         // Event start date must be a valid date
         body('eventStartDate').isISO8601().toDate().withMessage("event start date must be a valid date"),
         // Event end date must be a valid end date
-        body('eventEndDate').isISO8601().toDate().withMessage("event end date must be a valid date")
-    ]
+        body('eventEndDate').isISO8601().toDate().withMessage("event end date must be a valid date"),
+        // User Id must be a mongodb object id 24 characters long
+        body('userId').isLength({min: 24, max: 24}).withMessage("The user ID should be 24 characters long.")
+      ]
 }
 
 const eventIdValidation = () => {
     return [
         param('id').isLength({min: 24, max: 24}).withMessage("The id should be 24 characters long.")
     ]
+}
+
+const userIdValidation = () => {
+  return [
+    param('userId').isLength({min: 24, max: 24}).withMessage("The user ID should be 24 characters long.")
+  ]
 }
 
 const validateError = (req, res, next) => {
@@ -57,5 +65,6 @@ const validateError = (req, res, next) => {
     createEventValidation,
     updateEventValidation,
     eventIdValidation,
+    userIdValidation,
     validateError,
   }

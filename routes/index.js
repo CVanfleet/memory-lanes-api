@@ -10,6 +10,7 @@ router.get('/', ensureGuest, (req, res) => {
 // @desc    Dashboard
 // @route   GET /
 router.get('/dashboard', ensureAuth, (req, res) => {
+    // Create model for events, use mongoose to retrieve all events for the current user req.user etc..
     res.render('main', {
         body: '../dashboard'
     })

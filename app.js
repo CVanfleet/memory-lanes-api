@@ -3,10 +3,11 @@ const dotenv = require('dotenv')
 const BodyParser = require('body-parser')
 const mongodb = require('./config/connect')
 const swaggerUi = require('swagger-ui-express')
+const mongoose = require('mongoose')
 const morgan = require('morgan')
 const passport = require('passport')
 const session = require('express-session')
-const MemoryStore = require('memorystore')(session)
+const MongoStore = require('connect-mongo')
 const cors = require('cors')
 const swaggerDocument = require('./path/swagger-output.json')
 
@@ -39,13 +40,10 @@ app.set('views', './views/layouts');
 
 app.use(
     session({
-        cookie: { maxAge: 86400000 },
-        store: new MemoryStore({
-            checkPeriod: 86400000
-        }),
         secret: 'Cool B34ns',
         resave: false,
         saveUninitialized: false,
+        store: MongoStore.create({mongoUrl:process.env.MONGODB_URI}),
     })
 )
 

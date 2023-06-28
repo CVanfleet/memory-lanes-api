@@ -4,10 +4,18 @@ const mongoose = require('mongoose')
 const User = require('../models/User')
 
 module.exports = function(passport, domain) {
+    // if in dev, use local host path for callbackURL if not, use render site
+    let callbackUrl = '';
+    if(process.env.NODE_ENV === 'development') {
+        callbackUrl = '/auth/google/callback';
+    } else {
+        callbackUrl = 'https://memory-lanes-api.onrender.com/auth/google/callback';
+    }
+
     passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: 'https://memory-lanes-api.onrender.com/auth/google/callback',
+        callbackURL: callbackUrl,
     },
     async (accessToken, refreshToken, profile, done) => {
         const newUser = {

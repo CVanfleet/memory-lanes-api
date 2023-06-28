@@ -81,6 +81,10 @@
                 "eventEndDate": {
                   "type": "string",
                   "example": "2011-10-05T14:48:00.000Z"
+                },
+                "userId": {
+                  "type": "string",
+                  "example": "649bb3a89003b6e0daf4cd57"
                 }
               },
               "required": [
@@ -89,7 +93,8 @@
                 "lat",
                 "long",
                 "eventStartDate",
-                "eventEndDate"
+                "eventEndDate",
+                "userId"
               ]
             }
           }
@@ -221,6 +226,35 @@
           },
           "502": {
             "description": "Bad Gateway"
+          }
+        }
+      }
+    },
+    "/events/user/{userId}": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Get event by user id",
+        "description": "This request gets all events by user",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "User id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
           }
         }
       }

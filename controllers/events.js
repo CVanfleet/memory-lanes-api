@@ -34,6 +34,24 @@ async function getEventById(req, res, next){
     }
 }
 
+async function getEventsByUser(req, res, next){
+    // #swagger.tags = ['Events']
+    // #swagger.summary = 'Get event by user id'
+    // #swagger.description = 'This request gets all events by user'
+    // #swagger.parameters['userId'] = { description: 'User id' }
+    
+    const userId = new ObjectId(req.params.userId);
+
+    try {
+        const result = await mongo.getConnection().db('memory-lanes-db').collection('event').find({userId: userId});
+        const list = await result.toArray();
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(list);
+    } catch (error) {
+        next(error);
+    }
+}
+
 async function createEvent(req, res, next) {
     // #swagger.tags = ['Events']
     // #swagger.summary = 'Create an event'
@@ -48,13 +66,25 @@ async function createEvent(req, res, next) {
             $lat: 37.0965,
             $long: 113.5684,
             $eventStartDate: '2011-10-05T14:48:00.000Z',
-            $eventEndDate: '2011-10-05T14:48:00.000Z'
+            $eventEndDate: '2011-10-05T14:48:00.000Z',
+            $userId: '649bb3a89003b6e0daf4cd57'
         }
     } */
-    const event = req.body;
-    const collection = mongo.getConnection().db('memory-lanes-db').collection('event');
 
     try {
+        const {eventName, eventDescription, lat, long, eventStartDate, eventEndDate, userId} = req.body;
+        const user = new ObjectId(userId);
+
+        const event = {
+            eventName,
+            eventDescription,
+            lat,
+            long,
+            eventStartDate,
+            eventEndDate,
+            userId : user
+        };
+        const collection = mongo.getConnection().db('memory-lanes-db').collection('event');
         const result = await collection.insertOne(event);
         res.send(result).status(201);
     } catch (error) {
@@ -119,6 +149,7 @@ async function deleteEvent(req, res, next){
 module.exports = {
     getEvents,
     getEventById,
+    getEventsByUser,
     createEvent,
     updateEvent,
     deleteEvent,
