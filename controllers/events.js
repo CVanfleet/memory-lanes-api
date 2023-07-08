@@ -40,7 +40,7 @@ async function getEventsByUser(req, res, next){
     // #swagger.description = 'This request gets all events by user'
     // #swagger.parameters['userId'] = { description: 'User id' }
     
-    const userId = new ObjectId(req.params.userId);
+    const userId = req.params.userId;
 
     try {
         const result = await mongo.getConnection().db('memory-lanes-db').collection('event').find({userId: userId});
@@ -73,7 +73,6 @@ async function createEvent(req, res, next) {
 
     try {
         const {eventName, eventDescription, lat, long, eventStartDate, eventEndDate, userId} = req.body;
-        const user = new ObjectId(userId);
 
         const event = {
             eventName,
@@ -82,7 +81,7 @@ async function createEvent(req, res, next) {
             long,
             eventStartDate,
             eventEndDate,
-            userId : user
+            userId
         };
         const collection = mongo.getConnection().db('memory-lanes-db').collection('event');
         const result = await collection.insertOne(event);
